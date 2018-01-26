@@ -9,5 +9,6 @@ setup(
     url="https://github.com/kanazux/throughpy",
     author='Silvio AS a.k.a kanazuchi',
     author_email='contato@kanazuchi.com',
+    scripts=['scripts/throughpy'],
     description="A script to test throughput of the main interface with a formatted output using iperf3.",
 )
