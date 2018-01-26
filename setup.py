@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="throughpy"
+    name="throughpy",
     version="0.1",
     license="BSD2CLAUSE",
     packages=find_packages(),
