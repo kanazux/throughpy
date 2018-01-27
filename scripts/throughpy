@@ -1,0 +1,53 @@
+#!/usr/local/bin/python2.7
+# -*- coding: utf-8 -*-
+#
+#  Use iperf3 to get throughput of interfaces and print a formatted output
+#  Silvio Ap Silva a.k.a Kanazuchi <contato@kanazuchi.com>
+#
+
+
+from throughpy import throughpy_parser
+from throughpy import throughpy_data
+
+
+def main():
+
+    get_n_ports = opts.n_ports.split(',')
+
+    if len(get_n_ports) == 1 and ".." in get_n_ports[0]:
+        ranges = get_n_ports[0].split('..')
+        if (len(ranges) == 2):
+            n_ports = range(int(ranges[0]), int(ranges[1]))
+        elif len(ranges) == 3:
+            n_ports = range(int(ranges[0]), int(ranges[1]), int(ranges[2]))
+    else:
+        n_ports = get_n_ports
+
+    try:
+        print('')
+        for port in n_ports:
+
+            if int(port) > 128 or int(port) < 1:
+                throughpy_parser.set_parser("help")
+
+            sum_data = throughpy_data.get_data(port, opts)
+            if int(port) == 1:
+                f_data = 6
+            else:
+                f_data = 5
+            print("#####  Test using {} ports  #####".format(port))
+            print("Bandwidth min: {}".format(min([int(x.split()[f_data].split('.')[0]) for x in sum_data])))
+            print("Bandwidth max: {}".format(max([int(x.split()[f_data].split('.')[0]) for x in sum_data])))
+            print("Bandwidth media: {}".format(
+              " ".join([sum_data[-1].split()[f_data], sum_data[-1].split()[f_data+1]])))
+            if opts.data:
+                print("Time to transfer {} Mb: {} seconds".format(opts.data, sum_data[-1].split()[-6].split('-')[1]))
+
+            print('')
+    except UnboundLocalError:
+        pass
+
+
+if __name__ == "__main__":
+    opts = throughpy_parser.set_parser()
+    main()
