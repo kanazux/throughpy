@@ -27,3 +27,20 @@ optional arguments:  -h, --help show this help message and exit
 %> pip throughpy install
 ```
 ### [\[PyPi\]](https://pypi.python.org/pypi/throughpy "throughpy on PyPi")
+
+## Output formatted:
+```
+%> throughpy -s 159.2100.100.1 -d 1024 -np 1,2
+
+#####  Test using 1 ports  #####
+Bandwidth min: 50
+Bandwidth max: 539
+Bandwidth media: 529 Mbits/sec
+Time to transfer 1024 Mb: 15.00 seconds
+
+#####  Test using 2 ports  #####
+Bandwidth min: 95
+Bandwidth max: 986
+Bandwidth media: 753 Mbits/sec
+Time to transfer 1024 Mb: 11.37 seconds
+```
